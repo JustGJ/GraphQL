@@ -1,0 +1,45 @@
+type Book {
+  id: ID
+  title: String
+  author: String
+}
+
+type Query {
+  hello(name: String): String,
+  books: [Book]
+  getBookById(bookId: ID): Book,
+  getTodos(filter: String) : [Todo]!
+  getTodoById(todoId: Int!): Todo
+}
+
+type Mutation {
+  addTodo(addTodoInput: TodoAddInput) : Todo!
+}
+
+input TodoAddInput {
+  name: String!,
+  content: String!,
+  userId: Int!
+}
+
+type Todo {
+  id: ID!
+  name: String!
+  content: String!
+  status: TodoStatusEnum!,
+  user: User!
+}
+
+enum TodoStatusEnum {
+  WAITING
+  IN_PROGRESS
+  CANCELED
+  DONE
+}
+
+type User {
+  id: ID!,
+  name: String!,
+  email: String!,
+  todos: [Todo]
+}
